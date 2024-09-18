@@ -1,32 +1,50 @@
 {
   "name": "@koa/router",
-  "description": "Router middleware for koa. Provides RESTful resource routing.",
-  "version": "10.1.1",
+  "description": "Router middleware for koa. Maintained by Forward Email and Lad.",
+  "version": "13.1.0",
   "author": "Alex Mingoia <talk@alexmingoia.com>",
   "bugs": {
     "url": "https://github.com/koajs/router/issues",
     "email": "niftylettuce@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Alex Mingoia",
+      "email": "talk@alexmingoia.com"
+    },
+    {
+      "name": "@koajs"
+    },
+    {
+      "name": "Imed Jaberi",
+      "email": "imed-jaberi@outlook.com"
+    }
+  ],
   "dependencies": {
-    "debug": "^4.3.4",
-    "http-errors": "^1.7.3",
+    "http-errors": "^2.0.0",
     "koa-compose": "^4.1.0",
-    "methods": "^1.1.2",
-    "path-to-regexp": "^6.2.1"
+    "path-to-regexp": "^6.3.0"
   },
   "devDependencies": {
-    "@ladjs/env": "^1.0.0",
-    "expect.js": "^0.3.1",
-    "jsdoc-to-markdown": "^5.0.3",
-    "koa": "^2.13.4",
-    "mocha": "^10.0.0",
-    "nyc": "^15.1.0",
-    "should": "^13.2.3",
-    "supertest": "^6.2.3",
-    "wrk": "^1.2.1"
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@ladjs/env": "^4.0.0",
+    "eslint": "^8.39.0",
+    "eslint-config-xo-lass": "^2.0.1",
+    "fixpack": "^4.0.0",
+    "husky": "^8.0.3",
+    "jsdoc-to-markdown": "^8.0.0",
+    "koa": "^2.15.3",
+    "lint-staged": "^14.0.1",
+    "mocha": "^10.7.3",
+    "nyc": "^17.0.0",
+    "remark-cli": "11",
+    "remark-preset-github": "^4.0.4",
+    "supertest": "^7.0.0",
+    "xo": "0.53.1"
   },
   "engines": {
-    "node": ">= 8.0.0"
+    "node": ">= 18"
   },
   "files": [
     "lib"
@@ -42,13 +60,16 @@
   "main": "lib/router.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/koajs/router.git"
+    "url": "git+https://github.com/koajs/router.git"
   },
   "scripts": {
-    "docs": "NODE_ENV=test jsdoc2md -t ./lib/API_tpl.hbs --src ./lib/*.js  >| API.md",
-    "test": "mocha test/**/*.js",
-    "test:watch": "mocha test/**/*.js --watch",
+    "bench": "make -C bench",
     "coverage": "nyc npm run test",
-    "bench": "make -C bench"
+    "docs": "NODE_ENV=test jsdoc2md -t ./lib/API_tpl.hbs --src ./lib/*.js  >| API.md",
+    "lint": "xo --fix && remark . -qfo && fixpack",
+    "prepare": "husky install",
+    "pretest": "npm run lint",
+    "test": "mocha test/**/*.js",
+    "test:watch": "mocha test/**/*.js --watch"
   }
 }
